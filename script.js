@@ -1,6 +1,5 @@
 // เปลี่ยน URL นี้เป็น Web App URL ของ Google Apps Script ที่ Deploy แล้ว
 const GAS_URL = "https://script.google.com/macros/s/AKfycbx5g4LX9dchD2RUsEHga1xVgXPn3LidoWh1OJ7TbxpIin0UrfgkgZZRTK3SRS86zcJJ/exec";
-
 let currentLang = 'th'; // ค่าเริ่มต้น
 
 // Dictionary สำหรับแปลภาษาทั้งหมด
@@ -142,43 +141,3 @@ document.getElementById('btnPreview').addEventListener('click', async function()
     });
 });
 // (โค้ด function getBase64() เหมือนเดิม)
-⚙️ 4. Google Apps Script (ปรับปรุงเรื่อง Email หลายภาษา)
-อัปเดตโค้ดฝั่งหลังบ้านให้ดึง data.lang มาใช้กำหนดภาษาของอีเมลที่ส่งไปยืนยัน
-
-JavaScript
-function doPost(e) {
-  try {
-    const data = JSON.parse(e.postData.contents);
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-    const folder = DriveApp.getFolderById(FOLDER_ID);
-    let lastRow = sheet.getLastRow();
-    let requestId = "HBC-2026-" + ("00000" + (lastRow)).slice(-5);
-    
-    // ตั้งค่าภาษาสำหรับอีเมล
-    const mailText = {
-      'th': { sub: "ยืนยันการรับเรื่องแจ้งความประสงค์ตรวจสุขภาพ - ", body: `เรียน ${data.authName},<br><br>ทางเราได้รับข้อมูลของท่านเรียบร้อยแล้ว (เลขที่คำขอ: ${requestId}) เจ้าหน้าที่จะติดต่อกลับภายใน 2 วันทำการ<br>พบไฟล์สรุปข้อมูลแนบมาพร้อมอีเมลนี้` },
-      'en': { sub: "Health Checkup Request Confirmation - ", body: `Dear ${data.authName},<br><br>We have received your request (Req ID: ${requestId}). Our staff will contact you within 2 working days.<br>A summary PDF is attached.` },
-      'ko': { sub: "건강검진 신청 확인 - ", body: `${data.authName} 님께,<br><br>요청이 접수되었습니다 (요청 ID: ${requestId}). 2 영업일 이내에 담당자가 연락드릴 예정입니다.<br>요약 PDF 파일이 첨부되어 있습니다.` },
-      'ja': { sub: "健康診断申込の確認 - ", body: `${data.authName} 様,<br><br>お申し込みを受け付けました (リクエストID: ${requestId})。2営業日以内に担当者よりご連絡いたします。<br>サマリーのPDFが添付されています。` }
-    };
-    let lang = data.lang || 'th'; // ถ้าไม่มีให้ใช้ TH
-    let emailSubject = mailText[lang].sub + requestId;
-    let emailBody = mailText[lang].body;
-
-    // ... (ส่วนการสร้าง PDF, แนบไฟล์, เซฟลง Sheet และส่ง Telegram เหมือนเดิม) ...
-    
-    MailApp.sendEmail({
-      to: data.email,
-      subject: emailSubject,
-      htmlBody: emailBody,
-      attachments: [pdfBlob] // แนบ PDF ตัวเดิมที่สคริปต์สร้างไว้
-    });
-
-    return ContentService.createTextOutput(JSON.stringify({ status: 'success', requestId: requestId }))
-                         .setMimeType(ContentService.MimeType.JSON);
-
-  } catch (error) {
-    return ContentService.createTextOutput(JSON.stringify({ status: 'error', message: error.toString() }))
-                         .setMimeType(ContentService.MimeType.JSON);
-  }
-}
