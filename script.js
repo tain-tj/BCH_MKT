@@ -194,15 +194,22 @@ document.getElementById('btnPreview').addEventListener('click', async function()
             payload.fileQuote = await getBase64(document.getElementById('fileQuote'));
             payload.fileReferral = await getBase64(document.getElementById('fileReferral'));
 
+            // ส่วนที่ยิง API ไปหา GAS
             fetch(GAS_URL, {
                 method: 'POST',
                 body: JSON.stringify(payload)
             }).then(res => res.json()).then(data => {
-                Swal.fire({
-                    title: i18n[currentLang].swalSuccess,
-                    html: `<b>Request ID: ${data.requestId}</b><br>${i18n[currentLang].swalSuccessDesc}`,
-                    icon: 'success'
-                }).then(() => location.reload());
+                // เช็คว่าสำเร็จจริงๆ
+                if (data.status === 'success') {
+                    Swal.fire({
+                        title: i18n[currentLang].swalSuccess,
+                        html: `<b>Request ID: ${data.requestId}</b><br>${i18n[currentLang].swalSuccessDesc}`,
+                        icon: 'success'
+                    }).then(() => location.reload());
+                } else {
+                    // ถ้า Apps Script Error ให้แสดงข้อความออกมา
+                    Swal.fire('พบข้อผิดพลาดฝั่งเซิร์ฟเวอร์', data.message, 'error');
+                }
             }).catch(err => {
                 Swal.fire('Error', i18n[currentLang].swalError, 'error');
             });
