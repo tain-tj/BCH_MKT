@@ -63,7 +63,78 @@
                 <div class="col-md-6"><label class="text-muted"><i class="fa-solid fa-paperclip"></i> <span data-i18n="fileVat">สำเนาใบ ภ.พ.20 (ไม่บังคับ)</span></label><input type="file" class="form-control" id="fileVat"></div>
             </div>
 
-            <!-- ... โครงสร้างฟอร์มส่วนอื่นๆ คงเดิม แต่เพิ่ม data-i18n ให้กับ label ต่างๆ (ผมรวบรัดในส่วนที่เหลือเพื่อไม่ให้รกเกินไป คุณสามารถใส่ data-i18n ลงไปใน tag ที่ต้องการแปลได้เลยตาม Dictionary ด้านล่าง) ... -->
+            <!-- 3. รูปแบบการชำระเงิน -->
+            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-credit-card"></i> รูปแบบการชำระเงิน</h4>
+            <div class="mb-4">
+                <div class="form-check"><input class="form-check-input" type="radio" name="payment" value="โอนเงินผ่านธนาคาร" required><label class="form-check-label">โอนเงินผ่านธนาคาร (ล่วงหน้า 7 วัน)</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="payment" value="ชำระเงินสด"><label class="form-check-label">ชำระเงินสด (วันเข้ารับบริการ)</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="payment" value="วางบิลบริษัท"><label class="form-check-label">วางบิลบริษัท - เครดิต 30 วัน (เฉพาะยอดขั้นต่ำ 50,000 บาท)</label></div>
+            </div>
+
+            <!-- 4. ประเภทบริการ -->
+            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-stethoscope"></i> ประเภทบริการ</h4>
+            <div class="row mb-4">
+                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจสุขภาพประจำปี"><label>ตรวจสุขภาพประจำปี</label></div></div>
+                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจสุขภาพก่อนเข้าทำงาน"><label>ตรวจสุขภาพก่อนเข้าทำงาน</label></div></div>
+                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจสุขภาพเพื่อ Work Permit"><label>เพื่อ Work Permit</label></div></div>
+                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจคัดกรองมะเร็งปากมดลูก"><label>คัดกรองมะเร็งปากมดลูก</label></div></div>
+                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจคัดกรองมะเร็งเต้านม"><label>คัดกรองมะเร็งเต้านม</label></div></div>
+                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ฉีดวัคซีนไข้หวัดใหญ่"><label>ฉีดวัคซีนไข้หวัดใหญ่</label></div></div>
+                <div class="col-12 mt-2 d-flex align-items-center">
+                    <input class="form-check-input check-service me-2" type="checkbox" id="checkOther"> <label class="me-2">อื่นๆ:</label>
+                    <input type="text" class="form-control form-control-sm w-50" name="serviceOther" id="inputOther" disabled>
+                </div>
+            </div>
+
+            <!-- 5. วันที่ & ผู้รับบริการ -->
+            <h4 class="text-secondary border-bottom pb-2"><i class="fa-regular fa-calendar-check"></i> กำหนดการเข้ารับบริการ</h4>
+            <div class="row g-3 mb-4">
+                <div class="col-md-4"><label>ตั้งแต่วันที่</label><input type="date" class="form-control" name="startDate" id="startDate" required></div>
+                <div class="col-md-4"><label>ถึงวันที่</label><input type="date" class="form-control" name="endDate" id="endDate" required></div>
+                <div class="col-md-4"><label>จำนวนผู้เข้ารับบริการ (คน)</label><input type="number" class="form-control" name="attendees" min="1" required></div>
+                <small class="text-danger">* เลือกวันที่ล่วงหน้าได้อย่างน้อย 10 วันทำการ</small>
+            </div>
+
+            <!-- 6. ผู้ประสานงานฉุกเฉิน -->
+            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-user-tie"></i> ผู้ประสานงานกรณีเร่งด่วน</h4>
+            <div class="row g-3 mb-4">
+                <div class="col-md-6"><label>ชื่อ-นามสกุล</label><input type="text" class="form-control" name="emName" required></div>
+                <div class="col-md-6"><label>ตำแหน่ง</label><input type="text" class="form-control" name="emPosition" required></div>
+                <div class="col-md-6"><label>โทรศัพท์มือถือ</label><input type="text" class="form-control" name="emMobile" required></div>
+                <div class="col-md-6"><label>โทรศัพท์สำนักงาน</label><input type="text" class="form-control" name="emOffice" required></div>
+            </div>
+
+            <!-- 7. การยืนยันสิทธิ์ & ผลตรวจ -->
+            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-clipboard-list"></i> การจัดการผลตรวจ</h4>
+            <div class="mb-3">
+                <label class="fw-bold">วิธีการยืนยันสิทธิ์:</label>
+                <div class="form-check"><input class="form-check-input" type="radio" name="verifyMethod" value="ใช้บัตรประชาชน" required><label>ใช้บัตรประชาชน</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="verifyMethod" value="ใช้ใบส่งตัวจากบริษัท"><label>ใช้ใบส่งตัวจากบริษัท</label></div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="fw-bold">การจัดส่งผลตรวจรายบุคคล:</label>
+                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="จัดส่งให้พนักงานโดยตรง" required><label>จัดส่งให้พนักงานโดยตรง</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="จัดส่งให้บริษัท/HR" id="radioHR"><label>จัดส่งให้บริษัท/ผู้ประสานงาน HR</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="รับผลด้วยตนเองที่โรงพยาบาล"><label>รับผลด้วยตนเองที่โรงพยาบาล</label></div>
+                <input type="hidden" name="hrDetail" id="hrDetail">
+            </div>
+
+            <div class="mb-4">
+                <label class="fw-bold">การจัดส่งรายงานผลภาพรวมของบริษัท:</label>
+                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryReport" value="ไม่ต้องการ" required><label>ไม่ต้องการ</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryReport" value="ต้องการรายงานสรุปผลในภาพรวม" id="radioSummary"><label>ต้องการรายงานสรุปผลในภาพรวม 1 ฉบับ</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryReport" value="ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล"><label>ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล</label></div>
+                <input type="hidden" name="summaryFormat" id="summaryFormat">
+            </div>
+
+            <!-- 8. ไฟล์แนบเพิ่มเติม -->
+            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-file-arrow-up"></i> เอกสารแนบเพิ่มเติม</h4>
+            <div class="row g-3 mb-4">
+                <div class="col-md-12"><label class="text-muted">ไฟล์รายชื่อพนักงานที่ตรวจ (Excel)</label><input type="file" class="form-control" id="fileEmp"></div>
+                <div class="col-md-12"><label class="text-muted">ใบเสนอราคาพร้อมประทับตราบริษัท</label><input type="file" class="form-control" id="fileQuote"></div>
+                <div class="col-md-12"><label class="text-muted">ตัวอย่างใบส่งตัวของบริษัท (ถ้ามี)</label><input type="file" class="form-control" id="fileReferral"></div>
+            </div>
             
             <div class="text-center mt-5">
                 <button type="button" class="btn btn-primary btn-lg px-5" id="btnPreview"><i class="fa-solid fa-eye"></i> <span data-i18n="btnPreview">ตรวจสอบข้อมูล (Preview)</span></button>
