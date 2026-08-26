@@ -86,14 +86,26 @@ const i18n = {
 };
 
 // ฟังก์ชันเปลี่ยนภาษา
+// ฟังก์ชันเปลี่ยนภาษา
 function changeLanguage(lang) {
     currentLang = lang;
+    
+    // 1. แปลภาษาตามจุดต่างๆ ในหน้าเว็บ
     document.querySelectorAll('[data-i18n]').forEach(el => {
         let key = el.getAttribute('data-i18n');
         if(i18n[lang][key]) {
             if(el.tagName === 'INPUT' && el.type === 'button') el.value = i18n[lang][key];
             else el.innerHTML = i18n[lang][key];
         }
+    });
+
+    // 2. เด้ง Popup คำแนะนำก่อนเริ่ม ในภาษาที่เลือกใหม่
+    Swal.fire({
+        title: i18n[currentLang].swalAlertInfo,
+        html: i18n[currentLang].swalAlertDesc,
+        icon: 'info',
+        confirmButtonText: i18n[currentLang].swalBtnAck,
+        confirmButtonColor: '#0d6efd'
     });
 }
 
