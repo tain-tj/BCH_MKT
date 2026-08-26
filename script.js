@@ -1,7 +1,7 @@
 const GAS_URL = "https://script.google.com/macros/s/AKfycbx5g4LX9dchD2RUsEHga1xVgXPn3LidoWh1OJ7TbxpIin0UrfgkgZZRTK3SRS86zcJJ/exec";
 let currentLang = 'th'; // ค่าเริ่มต้น
 
-// Dictionary สำหรับแปลภาษาทั้งหมด (เพิ่มคำแปลสำหรับการแจ้งเตือนวันที่ผิด)
+// Dictionary สำหรับแปลภาษาทั้งหมด
 const i18n = {
     'th': {
         mainTitle: 'แบบฟอร์มแจ้งความประสงค์ตรวจสุขภาพสำหรับองค์กร',
@@ -21,7 +21,8 @@ const i18n = {
         swalSending: 'กำลังส่งข้อมูล...', swalSuccess: 'ส่งข้อมูลเรียบร้อยแล้ว', swalSuccessDesc: 'เจ้าหน้าที่จะตรวจสอบข้อมูลและติดต่อกลับภายใน 2 วันทำการ', swalError: 'ไม่สามารถส่งข้อมูลได้ กรุณาลองใหม่',
         popupHRTitle: 'ระบุข้อมูลผู้รับผล (HR)', popupHRName: 'ชื่อ-นามสกุล', popupHRPhone: 'เบอร์โทรศัพท์',
         popupFmtTitle: 'เลือกรูปแบบการสรุปผล', popupFmt1: 'รูปแบบที่ 1 – สรุปรวมตามสัญชาติ', popupFmt2: 'รูปแบบที่ 2 – สรุปรวมภาษาไทย', popupFmt3: 'รูปแบบที่ 3 – สรุปรวมภาษาอังกฤษ', popupFmtErr: 'กรุณาเลือกรูปแบบ!',
-        dateErrTitle: 'วันที่ไม่ถูกต้อง', dateErrMsg: 'กรุณาระบุวันที่เริ่มต้นล่วงหน้าอย่างน้อย 10 วันนับจากวันนี้'
+        dateErrTitle: 'วันที่ไม่ถูกต้อง', dateErrMsg: 'กรุณาระบุวันที่เริ่มต้นล่วงหน้าอย่างน้อย 10 วันนับจากวันนี้',
+        dateEndErrMsg: 'วันที่สิ้นสุดต้องไม่น้อยกว่าวันที่เริ่มต้น'
     },
     'en': {
         mainTitle: 'Corporate Health Checkup Request Form',
@@ -41,7 +42,8 @@ const i18n = {
         swalSending: 'Submitting...', swalSuccess: 'Submission Successful', swalSuccessDesc: 'Our staff will review and contact you within 2 working days.', swalError: 'Failed to submit data. Please try again.',
         popupHRTitle: 'HR Contact Information', popupHRName: 'Full Name', popupHRPhone: 'Phone Number',
         popupFmtTitle: 'Select Summary Format', popupFmt1: 'Format 1 - By Nationality', popupFmt2: 'Format 2 - Thai Language', popupFmt3: 'Format 3 - English Language', popupFmtErr: 'Please select a format!',
-        dateErrTitle: 'Invalid Date', dateErrMsg: 'Please select a start date at least 10 days from today.'
+        dateErrTitle: 'Invalid Date', dateErrMsg: 'Please select a start date at least 10 days from today.',
+        dateEndErrMsg: 'End date cannot be earlier than start date.'
     },
     'ko': {
         mainTitle: '기업 건강검진 신청서',
@@ -61,7 +63,8 @@ const i18n = {
         swalSending: '제출 중...', swalSuccess: '제출 성공', swalSuccessDesc: '담당자가 검토 후 2영업일 이내에 연락드리겠습니다.', swalError: '데이터 제출 실패. 다시 시도해주세요.',
         popupHRTitle: 'HR 담당자 정보', popupHRName: '성명', popupHRPhone: '전화번호',
         popupFmtTitle: '요약 형식 선택', popupFmt1: '형식 1 - 국적별 요약', popupFmt2: '형식 2 - 태국어 요약', popupFmt3: '형식 3 - 영어 요약', popupFmtErr: '형식을 선택해주세요!',
-        dateErrTitle: '잘못된 날짜', dateErrMsg: '오늘부터 최소 10일 이후의 시작일을 선택해주세요.'
+        dateErrTitle: '잘못된 날짜', dateErrMsg: '오늘부터 최소 10일 이후의 시작일을 선택해주세요.',
+        dateEndErrMsg: '종료일은 시작일보다 빠를 수 없습니다.'
     },
     'ja': {
         mainTitle: '企業向け健康診断申込書',
@@ -81,11 +84,11 @@ const i18n = {
         swalSending: '送信中...', swalSuccess: '送信完了', swalSuccessDesc: '担当者が確認の上、2営業日以内にご連絡いたします。', swalError: '送信に失敗しました。再試行してください。',
         popupHRTitle: 'HR担当者情報', popupHRName: '氏名', popupHRPhone: '電話番号',
         popupFmtTitle: 'サマリー形式の選択', popupFmt1: '形式 1 - 国籍別サマリー', popupFmt2: '形式 2 - タイ語サマリー', popupFmt3: '形式 3 - 英語サマリー', popupFmtErr: '形式を選択してください！',
-        dateErrTitle: '無効な日付', dateErrMsg: '開始日は今日から10日以上先の日付を選択してください。'
+        dateErrTitle: '無効な日付', dateErrMsg: '開始日は今日から10日以上先の日付を選択してください。',
+        dateEndErrMsg: '終了日は開始日より前に設定できません。'
     }
 };
 
-// ฟังก์ชันเปลี่ยนภาษา
 // ฟังก์ชันเปลี่ยนภาษา
 function changeLanguage(lang) {
     currentLang = lang;
@@ -109,6 +112,16 @@ function changeLanguage(lang) {
     });
 }
 
+// ฟังก์ชันช่วยหาค่าวันที่ล่วงหน้าใน Local Time (ป้องกัน Timezone ผิดเพี้ยน)
+function getMinDateString(daysToAdd) {
+    let d = new Date();
+    d.setDate(d.getDate() + daysToAdd);
+    let year = d.getFullYear();
+    let month = ("0" + (d.getMonth() + 1)).slice(-2);
+    let day = ("0" + d.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+}
+
 window.onload = function() {
     Swal.fire({
         title: i18n[currentLang].swalAlertInfo,
@@ -118,9 +131,8 @@ window.onload = function() {
         confirmButtonColor: '#0d6efd'
     });
 
-    let today = new Date();
-    today.setDate(today.getDate() + 10);
-    let minDateStr = today.toISOString().split('T')[0];
+    // กำหนดวันที่ขั้นต่ำให้ Date Picker
+    let minDateStr = getMinDateString(10);
     document.getElementById("startDate").setAttribute("min", minDateStr);
     document.getElementById("endDate").setAttribute("min", minDateStr);
 
@@ -129,6 +141,42 @@ window.onload = function() {
         $district: $('#subdistrict'), $amphoe: $('#district'), $province: $('#province'), $zipcode: $('#zipcode')
     });
 };
+
+// --- ดักจับ Event พิมพ์หรือเลือกวันที่แบบ Real-time ---
+document.getElementById('startDate').addEventListener('change', function() {
+    let minDateStr = this.getAttribute('min');
+    // หากวันที่ใส่น้อยกว่าขั้นต่ำ
+    if (this.value && this.value < minDateStr) {
+        Swal.fire({
+            icon: 'warning',
+            title: i18n[currentLang].dateErrTitle,
+            text: i18n[currentLang].dateErrMsg,
+            confirmButtonColor: '#0d6efd'
+        });
+        this.value = ''; // เคลียร์ช่องให้ว่าง
+    } else if (this.value) {
+        // อัปเดตช่อง "ถึงวันที่" ไม่ให้เลือกวันก่อนหน้า "ตั้งแต่วันที่" ได้
+        document.getElementById('endDate').setAttribute('min', this.value);
+        let endDateVal = document.getElementById('endDate').value;
+        if (endDateVal && endDateVal < this.value) {
+            document.getElementById('endDate').value = this.value;
+        }
+    }
+});
+
+document.getElementById('endDate').addEventListener('change', function() {
+    let startDateVal = document.getElementById('startDate').value;
+    if (startDateVal && this.value && this.value < startDateVal) {
+        Swal.fire({
+            icon: 'warning',
+            title: i18n[currentLang].dateErrTitle,
+            text: i18n[currentLang].dateEndErrMsg,
+            confirmButtonColor: '#0d6efd'
+        });
+        this.value = startDateVal; // ตั้งให้เท่ากับวันเริ่ม
+    }
+});
+// ----------------------------------------------------
 
 // Checkbox อื่นๆ
 document.getElementById('checkOther').addEventListener('change', function() {
@@ -174,27 +222,23 @@ document.getElementById('radioSummary').addEventListener('change', function() {
 
 document.getElementById('btnPreview').addEventListener('click', async function() {
     let form = document.getElementById('healthForm');
+    
+    // ตรวจสอบขั้นสุดท้าย ป้องกันคนกดส่งโดยไม่กรอกอะไรเลย
     if(!form.checkValidity()) { form.reportValidity(); return; }
-
-    // --- เพิ่มเงื่อนไขตรวจสอบวันที่ (ล่วงหน้าอย่างน้อย 10 วัน) ---
+    
     let startDateInput = document.getElementById("startDate").value;
-    let todayCheck = new Date();
-    todayCheck.setDate(todayCheck.getDate() + 10);
-    todayCheck.setHours(0,0,0,0); // รีเซ็ตเวลาเพื่อเทียบแค่วันที่
+    let minDateStr = document.getElementById("startDate").getAttribute("min");
 
-    let selectedStartDate = new Date(startDateInput);
-    selectedStartDate.setHours(0,0,0,0);
-
-    if (selectedStartDate < todayCheck) {
+    // ตรวจสอบย้ำอีกครั้งก่อน Preview ป้องกันการ Bypass
+    if (startDateInput < minDateStr) {
         Swal.fire({
             icon: 'warning',
             title: i18n[currentLang].dateErrTitle,
             text: i18n[currentLang].dateErrMsg,
             confirmButtonColor: '#0d6efd'
         });
-        return; // หยุดการทำงาน ไม่ให้ Preview ต่อ
+        return; 
     }
-    // --------------------------------------------------------
 
     let formData = new FormData(form);
     let previewHtml = `<div style="text-align:left; font-size:14px; max-height: 300px; overflow-y:auto;">`;
@@ -235,7 +279,6 @@ document.getElementById('btnPreview').addEventListener('click', async function()
                 method: 'POST',
                 body: JSON.stringify(payload)
             }).then(res => res.json()).then(data => {
-                // เช็คว่าสำเร็จจริงๆ
                 if (data.status === 'success') {
                     Swal.fire({
                         title: i18n[currentLang].swalSuccess,
