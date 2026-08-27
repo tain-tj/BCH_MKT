@@ -29,6 +29,7 @@
 
         <form id="healthForm" class="shadow p-4 bg-white rounded">
             
+            <!-- Download Template Link -->
             <div class="mb-4 text-center">
                 <a href="https://github.com/tain-tj/BCH_MKT/raw/refs/heads/main/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%9F%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%A1%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%9E%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%A0%E0%B8%B2%E0%B8%9E.xlsx" class="btn btn-success" target="_blank" id="btnDownloadExcel">
                     <i class="fa-solid fa-file-excel"></i> <span data-i18n="downloadTemp">ดาวน์โหลด Template รายชื่อผู้ตรวจสุขภาพ (Excel)</span>
@@ -67,7 +68,7 @@
             <div class="mb-4">
                 <div class="form-check"><input class="form-check-input payment-radio" type="radio" name="payment" value="โอนเงินผ่านธนาคาร" id="pay1" required><label class="form-check-label" for="pay1" data-i18n="payBank">โอนเงินผ่านธนาคาร (ล่วงหน้า 7 วัน)</label></div>
                 <div class="form-check"><input class="form-check-input payment-radio" type="radio" name="payment" value="ชำระเงินสด" id="pay2"><label class="form-check-label" for="pay2" data-i18n="payCash">ชำระเงินสด (วันเข้ารับบริการ)</label></div>
-                <div class="form-check"><input class="form-check-input payment-radio" type="radio" name="payment" value="วางบิลบริษัท" id="pay3"><label class="form-check-label" for="pay3" data-i18n="payCredit">วางบิลบริษัท - เครดิต 30 วัน (เฉพาะยอดขั้นต่ำ 50,000 บาท)</label></div>
+                <div class="form-check"><input class="form-check-input payment-radio" type="radio" name="payment" value="วางบิลบริษัท - เครดิต 30 วัน (เฉพาะยอดขั้นต่ำ 50,000 บาท)" id="pay3"><label class="form-check-label" for="pay3" data-i18n="payCredit">วางบิลบริษัท - เครดิต 30 วัน (เฉพาะยอดขั้นต่ำ 50,000 บาท)</label></div>
             </div>
 
             <!-- ส่วนกรอกรายละเอียดการวางบิล (ซ่อนตอนแรก) -->
@@ -132,50 +133,62 @@
                 <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="จัดส่งให้พนักงานโดยตรง" id="del1" required><label for="del1" data-i18n="resDeliEmp">จัดส่งให้พนักงานโดยตรง</label></div>
                 <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="จัดส่งให้บริษัท/HR" id="radioHR"><label for="radioHR" data-i18n="resDeliHR">จัดส่งให้บริษัท/ผู้ประสานงาน HR</label></div>
                 <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="รับผลด้วยตนเองที่โรงพยาบาล" id="del2"><label for="del2" data-i18n="resDeliSelf">รับผลด้วยตนเองที่โรงพยาบาล</label></div>
-                
-                <div class="form-check d-flex align-items-center mt-1">
-                    <input class="form-check-input me-2" type="radio" name="deliveryPersonal" value="อื่นๆ" id="del3">
-                    <label for="del3" class="me-2" data-i18n="srvOther">อื่นๆ โปรดระบุ</label>
-                    <input type="text" class="form-control form-control-sm w-50" name="deliveryPersonalOther" id="inputDeliOther" disabled>
-                </div>
                 <input type="hidden" name="hrDetail" id="hrDetail">
             </div>
 
             <div class="mb-4">
                 <label class="fw-bold" data-i18n="resDeliReport">การจัดส่งรายงานผลภาพรวมของบริษัท:</label>
                 <div class="form-check"><input class="form-check-input report-radio" type="radio" name="deliveryReport" value="ไม่ต้องการ" id="rep1" required><label for="rep1" data-i18n="resRepNone">ไม่ต้องการ</label></div>
-                <div class="form-check"><input class="form-check-input report-radio" type="radio" name="deliveryReport" value="ต้องการรายงานสรุปผลในภาพรวม" id="radioSummary"><label for="radioSummary" data-i18n="resRepSummary">ต้องการรายงานสรุปผลในภาพรวม 1 ฉบับ</label></div>
+                <div class="form-check"><input class="form-check-input report-radio" type="radio" name="deliveryReport" value="ต้องการรายงานสรุปผลในภาพรวม 1 ฉบับ" id="radioSummary"><label for="radioSummary" data-i18n="resRepSummary">ต้องการรายงานสรุปผลในภาพรวม 1 ฉบับ</label></div>
                 <div class="form-check"><input class="form-check-input report-radio" type="radio" name="deliveryReport" value="ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล" id="rep2"><label for="rep2" data-i18n="resRepCopy">ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล</label></div>
+                
+                <div class="form-check d-flex align-items-center mt-1">
+                    <input class="form-check-input report-radio me-2" type="radio" name="deliveryReport" value="อื่นๆ" id="rep3">
+                    <label for="rep3" class="me-2" data-i18n="srvOther">อื่นๆ โปรดระบุ</label>
+                    <input type="text" class="form-control form-control-sm w-50" name="deliveryReportOther" id="inputRepOther" disabled>
+                </div>
             </div>
 
-            <!-- ส่วนเลือกรูปแบบสรุปผล (คล้ายรูปภาพอ้างอิง) -->
+            <!-- ส่วนเลือกรูปแบบสรุปผล (แสดงเฉพาะเมื่อคลิกรับรายงานสรุปผล) -->
             <div id="summaryDetailsDiv" class="p-3 mb-4 bg-light border rounded" style="display: none;">
                 <h5 class="text-center text-primary mb-3 fw-bold" data-i18n="sumTitle">เลือกรูปแบบการสรุปผล</h5>
                 <hr style="width: 50px; margin: 0 auto 20px auto; border: 2px solid #6c5ce7;">
                 <input type="hidden" name="summaryFormat" id="summaryFormatVal">
                 
-                <div class="row g-3 mb-4">
-                    <div class="col-md-4">
-                        <label class="format-card d-block" for="fmt1" id="cardFmt1">
-                            <input type="radio" name="fmtRadio" id="fmt1" value="รูปแบบที่ 1" class="d-none">
-                            <div class="format-icon"><i class="fa-solid fa-file-lines"></i></div>
-                            <h6 class="fw-bold mb-1" data-i18n="fmt1Title">รูปแบบที่ 1</h6>
+                <div class="row g-3 mb-4 px-2">
+                    <!-- Format 1 -->
+                    <div class="col-md-4 col-sm-12">
+                        <label class="format-card d-block" for="fmt1">
+                            <div class="d-flex align-items-start mb-2">
+                                <input type="radio" name="fmtRadio" id="fmt1" value="รูปแบบที่ 1" class="form-check-input" style="transform: scale(1.2);">
+                            </div>
+                            <div class="format-icon shadow-sm"><i class="fa-solid fa-file-lines"></i></div>
+                            <h6 class="fw-bold mb-1 text-dark" data-i18n="fmt1Title">รูปแบบที่ 1</h6>
                             <small class="text-muted" data-i18n="fmt1Desc">สรุปรวมตามสัญชาติ</small>
                         </label>
                     </div>
-                    <div class="col-md-4">
-                        <label class="format-card d-block" for="fmt2" id="cardFmt2">
-                            <input type="radio" name="fmtRadio" id="fmt2" value="รูปแบบที่ 2" class="d-none">
-                            <div class="format-icon"><i class="fa-solid fa-language"></i><span style="font-size: 10px; margin-left: 2px;">TH</span></div>
-                            <h6 class="fw-bold mb-1" data-i18n="fmt2Title">รูปแบบที่ 2</h6>
+                    <!-- Format 2 -->
+                    <div class="col-md-4 col-sm-12">
+                        <label class="format-card d-block" for="fmt2">
+                            <div class="d-flex align-items-start mb-2">
+                                <input type="radio" name="fmtRadio" id="fmt2" value="รูปแบบที่ 2" class="form-check-input" style="transform: scale(1.2);">
+                            </div>
+                            <div class="format-icon shadow-sm">
+                                <i class="fa-solid fa-language" style="font-size: 20px;"></i>
+                                <span style="font-size: 14px; margin-left: 2px;">TH</span>
+                            </div>
+                            <h6 class="fw-bold mb-1 text-dark" data-i18n="fmt2Title">รูปแบบที่ 2</h6>
                             <small class="text-muted" data-i18n="fmt2Desc">สรุปรวมภาษาไทย</small>
                         </label>
                     </div>
-                    <div class="col-md-4">
-                        <label class="format-card d-block" for="fmt3" id="cardFmt3">
-                            <input type="radio" name="fmtRadio" id="fmt3" value="รูปแบบที่ 3" class="d-none">
-                            <div class="format-icon">EN</div>
-                            <h6 class="fw-bold mb-1" data-i18n="fmt3Title">รูปแบบที่ 3</h6>
+                    <!-- Format 3 -->
+                    <div class="col-md-4 col-sm-12">
+                        <label class="format-card d-block" for="fmt3">
+                            <div class="d-flex align-items-start mb-2">
+                                <input type="radio" name="fmtRadio" id="fmt3" value="รูปแบบที่ 3" class="form-check-input" style="transform: scale(1.2);">
+                            </div>
+                            <div class="format-icon shadow-sm">EN</div>
+                            <h6 class="fw-bold mb-1 text-dark" data-i18n="fmt3Title">รูปแบบที่ 3</h6>
                             <small class="text-muted" data-i18n="fmt3Desc">สรุปรวมภาษาอังกฤษ</small>
                         </label>
                     </div>
@@ -207,9 +220,9 @@
             </div>
             
             <!-- PDPA Consent -->
-            <div class="form-check mb-4 p-3 bg-light border rounded">
-                <input class="form-check-input" type="checkbox" value="ยอมรับ" id="pdpaCheck" required style="margin-left: 5px; transform: scale(1.3);">
-                <label class="form-check-label ms-2 fw-bold text-primary cursor-pointer" for="pdpaCheck" data-i18n="pdpaTitle">
+            <div class="form-check mb-4 p-3 bg-light border rounded shadow-sm d-flex align-items-center">
+                <input class="form-check-input m-0" type="checkbox" value="ยอมรับ" id="pdpaCheck" required style="transform: scale(1.3);">
+                <label class="form-check-label ms-3 fw-bold text-primary cursor-pointer" id="pdpaLabel" data-i18n="pdpaTitle" style="text-decoration: underline;">
                     บริษัทรับทราบและตกลงยินยอมให้เผยแพร่ข้อมูลส่วนบุคคลในการลงทะเบียนครั้งนี้
                 </label>
             </div>
@@ -222,7 +235,6 @@
         <div class="text-center mt-4 mb-2 text-muted">
             <small>Created by Thumrong Malaiwalee</small>
         </div>
-
     </div>
 
     <!-- Modal PDPA -->
@@ -248,7 +260,7 @@
             <p data-i18n="pdpaP7">บริษัททราบว่า บริษัทสามารถถอนความยินยอมนี้เสียเมื่อใดก็ได้ โดยแจ้งการถอนความยินยอมให้โรงพยาบาล ฯ ทราบ และการแสดงความยินยอมหรือการถอนความยินยอมของบริษัท ไม่มีผลกระทบต่อการประมวลผลข้อมูลส่วนบุคคล ที่ได้ดำเนินการเสร็จสิ้นไปแล้วก่อนการแสดงความยินยอมหรือการถอนความยินยอมนี้</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary col-12" id="btnAcceptPdpa" data-bs-dismiss="modal" data-i18n="btnAccept">ยอมรับ (Accept)</button>
+            <button type="button" class="btn btn-primary px-5 mx-auto" id="btnAcceptPdpa" data-bs-dismiss="modal" data-i18n="btnAccept">ยอมรับ (Accept)</button>
           </div>
         </div>
       </div>
@@ -256,7 +268,7 @@
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Required for Modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> 
     <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
     <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
     <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
