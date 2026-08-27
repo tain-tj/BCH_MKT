@@ -142,19 +142,9 @@ window.onload = function() {
     });
 };
 
-// --- ดักจับ Event พิมพ์หรือเลือกวันที่แบบ Real-time ---
+// --- ดักจับ Event วันที่ (อัปเดตแบบเงียบๆ ไม่ให้รบกวนการพิมพ์บนมือถือ) ---
 document.getElementById('startDate').addEventListener('change', function() {
-    let minDateStr = this.getAttribute('min');
-    // หากวันที่ใส่น้อยกว่าขั้นต่ำ
-    if (this.value && this.value < minDateStr) {
-        Swal.fire({
-            icon: 'warning',
-            title: i18n[currentLang].dateErrTitle,
-            text: i18n[currentLang].dateErrMsg,
-            confirmButtonColor: '#0d6efd'
-        });
-        this.value = ''; // เคลียร์ช่องให้ว่าง
-    } else if (this.value) {
+    if (this.value) {
         // อัปเดตช่อง "ถึงวันที่" ไม่ให้เลือกวันก่อนหน้า "ตั้งแต่วันที่" ได้
         document.getElementById('endDate').setAttribute('min', this.value);
         let endDateVal = document.getElementById('endDate').value;
@@ -163,6 +153,14 @@ document.getElementById('startDate').addEventListener('change', function() {
         }
     }
 });
+
+document.getElementById('endDate').addEventListener('change', function() {
+    let startDateVal = document.getElementById('startDate').value;
+    if (startDateVal && this.value && this.value < startDateVal) {
+        this.value = startDateVal; // ตั้งให้เท่ากับวันเริ่มแบบเงียบๆ
+    }
+});
+// ----------------------------------------------------
 
 document.getElementById('endDate').addEventListener('change', function() {
     let startDateVal = document.getElementById('startDate').value;
