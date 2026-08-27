@@ -19,7 +19,7 @@
             <h2 id="titleMain" class="fw-bold text-primary" data-i18n="mainTitle">แบบฟอร์มแจ้งความประสงค์ตรวจสุขภาพสำหรับองค์กร</h2>
         </div>
 
-        <!-- Language Switcher (Flag Icons) -->
+        <!-- Language Switcher -->
         <div class="text-end mb-3">
             <img src="https://flagcdn.com/w40/th.png" class="flag-icon" title="ภาษาไทย" onclick="changeLanguage('th')">
             <img src="https://flagcdn.com/w40/gb.png" class="flag-icon" title="English" onclick="changeLanguage('en')">
@@ -29,7 +29,6 @@
 
         <form id="healthForm" class="shadow p-4 bg-white rounded">
             
-            <!-- Download Template Link -->
             <div class="mb-4 text-center">
                 <a href="https://github.com/tain-tj/BCH_MKT/raw/refs/heads/main/%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%9F%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B8%A1%E0%B8%A3%E0%B8%B2%E0%B8%A2%E0%B8%8A%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%9E%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%95%E0%B8%A3%E0%B8%A7%E0%B8%88%E0%B8%AA%E0%B8%B8%E0%B8%82%E0%B8%A0%E0%B8%B2%E0%B8%9E.xlsx" class="btn btn-success" target="_blank" id="btnDownloadExcel">
                     <i class="fa-solid fa-file-excel"></i> <span data-i18n="downloadTemp">ดาวน์โหลด Template รายชื่อผู้ตรวจสุขภาพ (Excel)</span>
@@ -50,15 +49,12 @@
             <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-file-invoice-dollar"></i> <span data-i18n="taxInfo">เอกสารประกอบการเปิดเครดิต</span></h4>
             <div class="row g-3 mb-2">
                 <div class="col-md-12"><label data-i18n="taxId">เลขประจำตัวผู้เสียภาษี</label><input type="text" class="form-control" name="taxId" required></div>
-                
                 <div class="col-md-4"><label data-i18n="addressNo">เลขที่/อาคาร/ชั้น</label><input type="text" class="form-control" name="addressNo" required></div>
                 <div class="col-md-4"><label data-i18n="street">ถนน</label><input type="text" class="form-control" name="street"></div>
                 <div class="col-md-4"><label data-i18n="soi">ซอย</label><input type="text" class="form-control" name="soi"></div>
-                
                 <div class="col-md-4"><label data-i18n="subdistrict">แขวง/ตำบล</label><input type="text" class="form-control" name="subdistrict" id="subdistrict" required></div>
                 <div class="col-md-4"><label data-i18n="district">เขต/อำเภอ</label><input type="text" class="form-control" name="district" id="district" required></div>
                 <div class="col-md-4"><label data-i18n="province">จังหวัด</label><input type="text" class="form-control" name="province" id="province" required></div>
-                
                 <div class="col-md-4"><label data-i18n="zipcode">รหัสไปรษณีย์</label><input type="text" class="form-control" name="zipcode" id="zipcode" required></div>
             </div>
             <div class="row g-3 mb-4">
@@ -69,9 +65,27 @@
             <!-- 3. รูปแบบการชำระเงิน -->
             <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-credit-card"></i> <span data-i18n="payTitle">รูปแบบการชำระเงิน</span></h4>
             <div class="mb-4">
-                <div class="form-check"><input class="form-check-input" type="radio" name="payment" value="โอนเงินผ่านธนาคาร" id="pay1" required><label class="form-check-label" for="pay1" data-i18n="payBank">โอนเงินผ่านธนาคาร (ล่วงหน้า 7 วัน)</label></div>
-                <div class="form-check"><input class="form-check-input" type="radio" name="payment" value="ชำระเงินสด" id="pay2"><label class="form-check-label" for="pay2" data-i18n="payCash">ชำระเงินสด (วันเข้ารับบริการ)</label></div>
-                <div class="form-check"><input class="form-check-input" type="radio" name="payment" value="วางบิลบริษัท" id="pay3"><label class="form-check-label" for="pay3" data-i18n="payCredit">วางบิลบริษัท - เครดิต 30 วัน (เฉพาะยอดขั้นต่ำ 50,000 บาท)</label></div>
+                <div class="form-check"><input class="form-check-input payment-radio" type="radio" name="payment" value="โอนเงินผ่านธนาคาร" id="pay1" required><label class="form-check-label" for="pay1" data-i18n="payBank">โอนเงินผ่านธนาคาร (ล่วงหน้า 7 วัน)</label></div>
+                <div class="form-check"><input class="form-check-input payment-radio" type="radio" name="payment" value="ชำระเงินสด" id="pay2"><label class="form-check-label" for="pay2" data-i18n="payCash">ชำระเงินสด (วันเข้ารับบริการ)</label></div>
+                <div class="form-check"><input class="form-check-input payment-radio" type="radio" name="payment" value="วางบิลบริษัท" id="pay3"><label class="form-check-label" for="pay3" data-i18n="payCredit">วางบิลบริษัท - เครดิต 30 วัน (เฉพาะยอดขั้นต่ำ 50,000 บาท)</label></div>
+            </div>
+
+            <!-- ส่วนกรอกรายละเอียดการวางบิล (ซ่อนตอนแรก) -->
+            <div id="billingDetailsDiv" class="p-3 mb-4 bg-light border rounded" style="display: none;">
+                <h6 class="text-primary mb-3" data-i18n="billInfoTitle">ข้อมูลสำหรับวางบิล</h6>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <label data-i18n="billAddress">ที่อยู่บริษัท</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="chkSameAddressBill">
+                            <label class="form-check-label text-muted" for="chkSameAddressBill" data-i18n="sameAddress">ใช้ที่อยู่เดียวกับบริษัท</label>
+                        </div>
+                        <input type="text" class="form-control" name="billAddress" id="billAddress">
+                    </div>
+                    <div class="col-md-4"><label data-i18n="billContact">ชื่อผู้ติดต่อ</label><input type="text" class="form-control" name="billName" id="billName"></div>
+                    <div class="col-md-4"><label data-i18n="billPhone">เบอร์โทร</label><input type="text" class="form-control" name="billPhone" id="billPhone"></div>
+                    <div class="col-md-4"><label data-i18n="billDateStr">ระบุวันวางบิล</label><input type="text" class="form-control" name="billDate" id="billDate"></div>
+                </div>
             </div>
 
             <!-- 4. ประเภทบริการ -->
@@ -79,12 +93,11 @@
             <div class="row mb-4">
                 <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจสุขภาพประจำปี" id="srv1"><label for="srv1" data-i18n="srvAnnual">ตรวจสุขภาพประจำปี</label></div></div>
                 <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจสุขภาพก่อนเข้าทำงาน" id="srv2"><label for="srv2" data-i18n="srvPreEmp">ตรวจสุขภาพก่อนเข้าทำงาน</label></div></div>
-                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจสุขภาพเพื่อ Work Permit" id="srv3"><label for="srv3" data-i18n="srvWorkPermit">เพื่อ Work Permit</label></div></div>
+                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจสุขภาพ Work Permit" id="srv3"><label for="srv3" data-i18n="srvWorkPermit">ตรวจสุขภาพ Work Permit</label></div></div>
                 <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจคัดกรองมะเร็งปากมดลูก" id="srv4"><label for="srv4" data-i18n="srvPap">คัดกรองมะเร็งปากมดลูก</label></div></div>
-                <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ตรวจคัดกรองมะเร็งเต้านม" id="srv5"><label for="srv5" data-i18n="srvMammo">คัดกรองมะเร็งเต้านม</label></div></div>
                 <div class="col-md-4"><div class="form-check"><input class="form-check-input check-service" type="checkbox" name="service" value="ฉีดวัคซีนไข้หวัดใหญ่" id="srv6"><label for="srv6" data-i18n="srvFlu">ฉีดวัคซีนไข้หวัดใหญ่</label></div></div>
                 <div class="col-12 mt-2 d-flex align-items-center">
-                    <input class="form-check-input check-service me-2" type="checkbox" id="checkOther"> <label class="me-2" for="checkOther" data-i18n="srvOther">อื่นๆ:</label>
+                    <input class="form-check-input check-service me-2" type="checkbox" id="checkOther"> <label class="me-2" for="checkOther" data-i18n="srvOther">อื่นๆ โปรดระบุ</label>
                     <input type="text" class="form-control form-control-sm w-50" name="serviceOther" id="inputOther" disabled>
                 </div>
             </div>
@@ -95,7 +108,7 @@
                 <div class="col-md-4"><label data-i18n="dateStart">ตั้งแต่วันที่</label><input type="date" class="form-control" name="startDate" id="startDate" required></div>
                 <div class="col-md-4"><label data-i18n="dateEnd">ถึงวันที่</label><input type="date" class="form-control" name="endDate" id="endDate" required></div>
                 <div class="col-md-4"><label data-i18n="dateCount">จำนวนผู้เข้ารับบริการ (คน)</label><input type="number" class="form-control" name="attendees" min="1" required></div>
-                <small class="text-danger" data-i18n="dateRemark">* เลือกวันที่ล่วงหน้าได้อย่างน้อย 10 วันทำการ</small>
+                <small class="text-danger" data-i18n="dateRemark">*กรุณาเลือกวันเข้ารับบริการล่วงหน้าอย่างน้อย 10 วันทำการ</small>
             </div>
 
             <!-- 6. ผู้ประสานงานฉุกเฉิน -->
@@ -108,11 +121,10 @@
             </div>
 
             <!-- 7. การยืนยันสิทธิ์ & ผลตรวจ -->
-            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-clipboard-list"></i> <span data-i18n="resTitle">การจัดการผลตรวจ</span></h4>
+            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-clipboard-list"></i> <span data-i18n="resTitle">วิธีการยืนยันสิทธิ์เข้ารับบริการ</span></h4>
             <div class="mb-3">
-                <label class="fw-bold" data-i18n="resVerify">วิธีการยืนยันสิทธิ์:</label>
-                <div class="form-check"><input class="form-check-input" type="radio" name="verifyMethod" value="ใช้บัตรประชาชน" id="ver1" required><label for="ver1" data-i18n="resIdCard">ใช้บัตรประชาชน</label></div>
-                <div class="form-check"><input class="form-check-input" type="radio" name="verifyMethod" value="ใช้ใบส่งตัวจากบริษัท" id="ver2"><label for="ver2" data-i18n="resReferral">ใช้ใบส่งตัวจากบริษัท</label></div>
+                <div class="form-check mb-2"><input class="form-check-input" type="radio" name="verifyMethod" value="ใช้บัตรประชาชน" id="ver1" required><label for="ver1" data-i18n="resIdCard">ใช้บัตรประชาชน (บริษัท/HR ต้องส่งรายชื่อผู้เข้ารับบริการล่วงหน้าอย่างน้อย 10 วันทำการ ก่อนวันตรวจ)</label></div>
+                <div class="form-check"><input class="form-check-input" type="radio" name="verifyMethod" value="ใช้ใบส่งตัวจากบริษัท" id="ver2"><label for="ver2" data-i18n="resReferral">ใช้ใบส่งตัวจากบริษัท (กรณีตรวจสุขภาพก่อนเข้าทำงาน)</label></div>
             </div>
             
             <div class="mb-3">
@@ -120,39 +132,131 @@
                 <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="จัดส่งให้พนักงานโดยตรง" id="del1" required><label for="del1" data-i18n="resDeliEmp">จัดส่งให้พนักงานโดยตรง</label></div>
                 <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="จัดส่งให้บริษัท/HR" id="radioHR"><label for="radioHR" data-i18n="resDeliHR">จัดส่งให้บริษัท/ผู้ประสานงาน HR</label></div>
                 <div class="form-check"><input class="form-check-input" type="radio" name="deliveryPersonal" value="รับผลด้วยตนเองที่โรงพยาบาล" id="del2"><label for="del2" data-i18n="resDeliSelf">รับผลด้วยตนเองที่โรงพยาบาล</label></div>
+                
+                <div class="form-check d-flex align-items-center mt-1">
+                    <input class="form-check-input me-2" type="radio" name="deliveryPersonal" value="อื่นๆ" id="del3">
+                    <label for="del3" class="me-2" data-i18n="srvOther">อื่นๆ โปรดระบุ</label>
+                    <input type="text" class="form-control form-control-sm w-50" name="deliveryPersonalOther" id="inputDeliOther" disabled>
+                </div>
                 <input type="hidden" name="hrDetail" id="hrDetail">
             </div>
 
             <div class="mb-4">
                 <label class="fw-bold" data-i18n="resDeliReport">การจัดส่งรายงานผลภาพรวมของบริษัท:</label>
-                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryReport" value="ไม่ต้องการ" id="rep1" required><label for="rep1" data-i18n="resRepNone">ไม่ต้องการ</label></div>
-                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryReport" value="ต้องการรายงานสรุปผลในภาพรวม" id="radioSummary"><label for="radioSummary" data-i18n="resRepSummary">ต้องการรายงานสรุปผลในภาพรวม 1 ฉบับ</label></div>
-                <div class="form-check"><input class="form-check-input" type="radio" name="deliveryReport" value="ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล" id="rep2"><label for="rep2" data-i18n="resRepCopy">ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล</label></div>
-                <input type="hidden" name="summaryFormat" id="summaryFormat">
+                <div class="form-check"><input class="form-check-input report-radio" type="radio" name="deliveryReport" value="ไม่ต้องการ" id="rep1" required><label for="rep1" data-i18n="resRepNone">ไม่ต้องการ</label></div>
+                <div class="form-check"><input class="form-check-input report-radio" type="radio" name="deliveryReport" value="ต้องการรายงานสรุปผลในภาพรวม" id="radioSummary"><label for="radioSummary" data-i18n="resRepSummary">ต้องการรายงานสรุปผลในภาพรวม 1 ฉบับ</label></div>
+                <div class="form-check"><input class="form-check-input report-radio" type="radio" name="deliveryReport" value="ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล" id="rep2"><label for="rep2" data-i18n="resRepCopy">ต้องการสำเนาผลตรวจของพนักงานแต่ละรายบุคคล</label></div>
             </div>
 
+            <!-- ส่วนเลือกรูปแบบสรุปผล (คล้ายรูปภาพอ้างอิง) -->
+            <div id="summaryDetailsDiv" class="p-3 mb-4 bg-light border rounded" style="display: none;">
+                <h5 class="text-center text-primary mb-3 fw-bold" data-i18n="sumTitle">เลือกรูปแบบการสรุปผล</h5>
+                <hr style="width: 50px; margin: 0 auto 20px auto; border: 2px solid #6c5ce7;">
+                <input type="hidden" name="summaryFormat" id="summaryFormatVal">
+                
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <label class="format-card d-block" for="fmt1" id="cardFmt1">
+                            <input type="radio" name="fmtRadio" id="fmt1" value="รูปแบบที่ 1" class="d-none">
+                            <div class="format-icon"><i class="fa-solid fa-file-lines"></i></div>
+                            <h6 class="fw-bold mb-1" data-i18n="fmt1Title">รูปแบบที่ 1</h6>
+                            <small class="text-muted" data-i18n="fmt1Desc">สรุปรวมตามสัญชาติ</small>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="format-card d-block" for="fmt2" id="cardFmt2">
+                            <input type="radio" name="fmtRadio" id="fmt2" value="รูปแบบที่ 2" class="d-none">
+                            <div class="format-icon"><i class="fa-solid fa-language"></i><span style="font-size: 10px; margin-left: 2px;">TH</span></div>
+                            <h6 class="fw-bold mb-1" data-i18n="fmt2Title">รูปแบบที่ 2</h6>
+                            <small class="text-muted" data-i18n="fmt2Desc">สรุปรวมภาษาไทย</small>
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="format-card d-block" for="fmt3" id="cardFmt3">
+                            <input type="radio" name="fmtRadio" id="fmt3" value="รูปแบบที่ 3" class="d-none">
+                            <div class="format-icon">EN</div>
+                            <h6 class="fw-bold mb-1" data-i18n="fmt3Title">รูปแบบที่ 3</h6>
+                            <small class="text-muted" data-i18n="fmt3Desc">สรุปรวมภาษาอังกฤษ</small>
+                        </label>
+                    </div>
+                </div>
+
+                <h6 class="text-primary mb-3" data-i18n="sumRecTitle">ข้อมูลผู้รับผลรายงาน</h6>
+                <div class="row g-3">
+                    <div class="col-md-6"><label data-i18n="sumName">ชื่อผู้รับผลรายงานตรวจสุขภาพ</label><input type="text" class="form-control" name="sumName" id="sumName"></div>
+                    <div class="col-md-6"><label data-i18n="sumPhone">เบอร์โทร</label><input type="text" class="form-control" name="sumPhone" id="sumPhone"></div>
+                    <div class="col-md-12">
+                        <label data-i18n="sumAddress">ที่อยู่</label>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" id="chkSameAddressSum">
+                            <label class="form-check-label text-muted" for="chkSameAddressSum" data-i18n="sameAddress">ใช้ที่อยู่เดียวกับบริษัท</label>
+                        </div>
+                        <input type="text" class="form-control" name="sumAddress" id="sumAddress">
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-danger" style="font-size: 0.85rem;" data-i18n="sumNote">(หมายเหตุ: กรุณาเลือกความประสงค์เพียง 1 รายการ ทั้งนี้ หากประสงค์รับทั้งรายงานสรุปผลในภาพรวมและผลการตรวจสุขภาพรายบุคคล ภายหลังจากตอบรับแล้ว อาจมีค่าใช้จ่ายเพิ่มเติมตามเงื่อนไขที่กำหนด)</p>
+
             <!-- 8. ไฟล์แนบเพิ่มเติม -->
-            <h4 class="text-secondary border-bottom pb-2"><i class="fa-solid fa-file-arrow-up"></i> <span data-i18n="attachTitle">เอกสารแนบเพิ่มเติม</span></h4>
+            <h4 class="text-secondary border-bottom pb-2 mt-4"><i class="fa-solid fa-file-arrow-up"></i> <span data-i18n="attachTitle">เอกสารแนบเพิ่มเติม</span></h4>
             <div class="row g-3 mb-4">
                 <div class="col-md-12"><label class="text-muted"><span data-i18n="attachEmp">ไฟล์รายชื่อพนักงานที่ตรวจ (Excel)</span></label><input type="file" class="form-control" id="fileEmp"></div>
                 <div class="col-md-12"><label class="text-muted"><span data-i18n="attachQuote">ใบเสนอราคาพร้อมประทับตราบริษัท</span></label><input type="file" class="form-control" id="fileQuote"></div>
                 <div class="col-md-12"><label class="text-muted"><span data-i18n="attachReferral">ตัวอย่างใบส่งตัวของบริษัท (เฉพาะตรวจสุขภาพก่อนเข้าทำงาน)</span></label><input type="file" class="form-control" id="fileReferral"></div>
             </div>
             
-            <div class="text-center mt-5">
+            <!-- PDPA Consent -->
+            <div class="form-check mb-4 p-3 bg-light border rounded">
+                <input class="form-check-input" type="checkbox" value="ยอมรับ" id="pdpaCheck" required style="margin-left: 5px; transform: scale(1.3);">
+                <label class="form-check-label ms-2 fw-bold text-primary cursor-pointer" for="pdpaCheck" data-i18n="pdpaTitle">
+                    บริษัทรับทราบและตกลงยินยอมให้เผยแพร่ข้อมูลส่วนบุคคลในการลงทะเบียนครั้งนี้
+                </label>
+            </div>
+
+            <div class="text-center mt-4">
                 <button type="button" class="btn btn-primary btn-lg px-5" id="btnPreview"><i class="fa-solid fa-eye"></i> <span data-i18n="btnPreview">ตรวจสอบข้อมูล (Preview)</span></button>
             </div>
         </form>
 
-        <!-- ส่วนที่เพิ่มใหม่: เครดิตผู้สร้าง -->
         <div class="text-center mt-4 mb-2 text-muted">
             <small>Created by Thumrong Malaiwalee</small>
         </div>
 
     </div>
 
+    <!-- Modal PDPA -->
+    <div class="modal fade" id="pdpaModal" tabindex="-1" aria-labelledby="pdpaModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title fw-bold" id="pdpaModalLabel" data-i18n="pdpaHeader">บริษัทรับทราบข้อมูลและขอแสดงเจตนายินยอม ดังต่อไปนี้</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="font-size: 0.95rem;">
+            <p data-i18n="pdpaP1">บริษัทยินยอมให้โรงพยาบาลกรุงเทพคริสเตียน (“โรงพยาบาล ฯ”) ในฐานะผู้ควบคุมข้อมูลส่วนบุคคลดำเนินการเก็บรวบรวม ใช้ หรือเปิดเผย (“การประมวลผล”) ข้อมูลส่วนบุคคลของบริษัท <b>เพื่อวัตถุประสงค์ต่าง ๆ ดังนี้</b></p>
+            <hr>
+            <p data-i18n="pdpaP2"><b>1.เพื่อวัตถุประสงค์ในการตรวจรักษาโรคและให้บริการทางการแพทย์</b> <br>บริษัทยินยอมโดยสมัครใจให้คณะแพทย์ พยาบาล และ/หรือบุคลากรอื่น ๆ ในทีมสุขภาพของโรงพยาบาล ฯ ทำการประมวลผลข้อมูลการตรวจรักษา และข้อมูลส่วนบุคคลของบุคลากรของบริษัทเท่าที่จำเป็น เพื่อให้บรรลุวัตถุประสงค์ในการรับบริการทางการแพทย์ได้ตลอดไป จนกว่าบริษัทจะได้เพิกถอนความยินยอม ทั้งนี้บริษัทรับทราบว่าในการประมวลผลนี้ให้รวมถึงการส่งต่อข้อมูลการตรวจ รักษา และข้อมูลส่วนบุคคลของบุคลากรของบริษัทไปยังบุคคลอื่นทั้งในประเทศและต่างประเทศ ในกรณีจำเป็นหรือตามคำร้องขอของบริษัทเพื่อให้บรรลุวัตถุประสงค์ในการให้บริการทางการแพทย์แก่บุคลากรของบริษัท ไม่ว่าประเทศนั้นจะมีกฎหมายคุ้มครองข้อมูลส่วนบุคคลถึงเกณฑ์หรือไม่ถึงเกณฑ์มาตรฐานกฎหมายคุ้มครองข้อมูลส่วนบุคคลของประเทศไทย โดยโรงพยาบาล ฯ จะต้องปฏิบัติตามขั้นตอนที่เหมาะสมในการคุ้มครองรักษาความปลอดภัยของข้อมูลส่วนบุคคลของบุคลากรของบริษัท</p>
+            <hr>
+            <p data-i18n="pdpaP3"><b>2.เพื่อวัตถุประสงค์ในเชื่อมโยงฐานข้อมูลอิเล็กทรอนิกส์ด้านเวชระเบียน และการศึกษาวิเคราะห์สำหรับการพัฒนาคุณภาพของการรักษาพยาบาล</b> <br>บริษัทยินยอมให้โรงพยาบาล ฯ นำข้อมูลการตรวจ รักษาและข้อมูลส่วนบุคคลของบริษัท ไปใช้เพื่อการเชื่อมโยงฐานข้อมูลอิเล็กทรอนิกส์ด้านเวชระเบียน ทั้งในโรงพยาบาล ฯ และนอกโรงพยาบาล ฯ เพื่อประโยชน์ต่อสุขภาพของเจ้าของข้อมูลส่วนบุคคล หรือไปใช้เพื่อการศึกษาวิเคราะห์ สำหรับการพัฒนาคุณภาพของการรักษาพยาบาล ทั้งนี้ โรงพยาบาล ฯ และบุคลากรของโรงพยาบาล ฯ มีหน้าที่รักษาความลับของข้อมูลดังกล่าวของบริษัทอย่างเคร่งครัด</p>
+            <hr>
+            <p data-i18n="pdpaP4"><b>3. เพื่อวัตถุประสงค์ในการใช้สิทธิเรียกค่าสินไหมทดแทนจากบริษัทประกันภัยหรือใช้สิทธิเบิกค่ารักษาพยาบาลจากบุคคลที่สามซึ่งเป็นบุคคลหรือนิติบุคคลทั้งในประเทศไทยและต่างประเทศ</b> <br>บริษัทยินยอมให้โรงพยาบาล ฯ เปิดเผย และ/หรือส่งสำเนาข้อมูลส่วนบุคคลของบริษัทที่มีอยู่กับโรงพยาบาล ฯ ให้บริษัทประกันภัย หรือผู้ให้บริการจัดการสินไหมทดแทนของบริษัทประกันภัยนั้น เพื่อการปฏิบัติตามสัญญาที่บริษัทหรือโรงพยาบาล ฯ ได้ทำหรือจะทำไว้กับบริษัทประกันภัย รวมถึงบุคคลที่สามตามที่บริษัทหรือโรงพยาบาล ฯ มีสัญญาต่อกัน หรือบุคคล นิติบุคคลหรือหน่วยงานไม่ว่าภาครัฐ เอกชน หรือรัฐวิสาหกิจ ทั้งในประเทศไทยและต่างประเทศที่เป็นผู้ส่งบริษัทมาตรวจรักษากับโรงพยาบาล ฯ หรือเป็นผู้ชำระค่าบริการตรวจรักษาของบริษัท</p>
+            <hr>
+            <p data-i18n="pdpaP5"><b>4.เพื่อวัตถุประสงค์ในการนำเสนอข้อมูลข่าวสารของโรงพยาบาล ฯ </b><br> บริษัทยินยอมให้โรงพยาบาล ฯ ประมวลผลข้อมูลส่วนบุคคลของบุคลากรของบริษัทเพื่อวัตถุประสงค์ในการวิเคราะห์สภาวะสุขภาพของบุคลากรของบริษัท และติดต่อเพื่อนำเสนอสินค้าและบริการตามสภาวะสุขภาพของบุคลากรของบริษัท รวมทั้งติดต่อ สื่อสาร ส่งข้อมูลส่วนด้านการแพทย์ และนำเสนอโปรโมชั่น สินค้าและบริการ แก่บริษัท</p>
+            <p data-i18n="pdpaP6">ทั้งนี้ ก่อนการแสดงเจตนา บริษัทได้อ่านนโยบายคุ้มครองข้อมูลส่วนบุคคล (Data Protection Policy) โดย scan QR Code ด้านล่างนี้ หรือได้รับคำอธิบายจากโรงพยาบาล ฯ ถึงวัตถุประสงค์ในการเก็บรวบรวม ใช้หรือเปิดเผยข้อมูลส่วนบุคคล และมีความเข้าใจโดยตลอดแล้ว</p>
+            <div class="text-center my-3"><a href="https://www.bch.in.th/data-protection-policy/" target="_blank"><img src="https://tain6666.github.io/bch.github.io/pic/PDPA.png" alt="PDPA QR Code" style="max-width: 150px;"></a></div>
+            <p data-i18n="pdpaP7">บริษัททราบว่า บริษัทสามารถถอนความยินยอมนี้เสียเมื่อใดก็ได้ โดยแจ้งการถอนความยินยอมให้โรงพยาบาล ฯ ทราบ และการแสดงความยินยอมหรือการถอนความยินยอมของบริษัท ไม่มีผลกระทบต่อการประมวลผลข้อมูลส่วนบุคคล ที่ได้ดำเนินการเสร็จสิ้นไปแล้วก่อนการแสดงความยินยอมหรือการถอนความยินยอมนี้</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary col-12" id="btnAcceptPdpa" data-bs-dismiss="modal" data-i18n="btnAccept">ยอมรับ (Accept)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> <!-- Required for Modal -->
     <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/JQL.min.js"></script>
     <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dependencies/typeahead.bundle.js"></script>
     <script src="https://earthchie.github.io/jquery.Thailand.js/jquery.Thailand.js/dist/jquery.Thailand.min.js"></script>
